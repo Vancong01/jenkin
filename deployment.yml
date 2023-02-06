@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: kenshinthuong/springboot-demo:v1
+        image: vancong/springboot-demo:v1
         ports:
             - containerPort: 8085
 ---
