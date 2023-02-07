@@ -6,20 +6,13 @@ pipeline {
 				git branch: 'master', url: 'https://github.com/Vancong01/jenkin.git'
 			}
 		}
-		stage('Docker build and push') {
-			steps{
-				withDockerRegistry(credentialsId: 'docker-hub', url: 'https://index.docker.io/v1/') {
-				sh 'docker build -t vancong/springboot-demo:v1 .'
-				sh 'docker push vancong/springboot-demo:v1'
-				
-				}
-			}
-		}
-		stage('Run container in Kubernetes') {
-			steps{
-				echo 'Kubernetes ...............................'
-				script {
-					kubernetesDeploy(configs: "deployment.yml",kubeconfigId:"kubernetes")
+		stage('Remote ssh server'){
+			steps {
+				sshagent(['ssh-remote']) {
+				echo '1.................................'
+    				sh 'ssh -o StrictHostKeyChecking=no -l vsii 192.168.0.221 docker ps'
+				echo '2.................................'
+				sh 'ssh -o StrictHostKeyChecking=no -l vsii 192.168.0.221 docker version'
 				}
 			}
 		}
