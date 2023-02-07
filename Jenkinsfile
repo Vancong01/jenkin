@@ -9,7 +9,7 @@ pipeline {
 		stage('Remote ssh server'){
 			steps {
 				sshagent(['ssh-remote']) {
-    				sh 'ssh -o StrictHostKeyChecking=no -l root 192.168.0.221 docker ps'
+    				sh 'ssh -o StrictHostKeyChecking=no -l root 192.168.0.221 touch thuong555.txt'
 				}
 			}
 		}
